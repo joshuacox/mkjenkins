@@ -21,6 +21,7 @@ cid:
 	$(eval NAME := $(shell cat NAME))
 	$(eval DATADIR := $(shell cat DATADIR))
 	$(eval TAG := $(shell cat TAG))
+	mkdir -p $(DATADIR)
 	@docker run --name=$(NAME) \
 	--cidfile="cid" \
 	-d \
@@ -63,5 +64,3 @@ DATADIR:
 	@while [ -z "$$DATADIR" ]; do \
 		read -r -p "Enter the destination of the Apache data directory you wish to associate with this container [DATADIR]: " DATADIR; echo "$$DATADIR">>DATADIR; cat DATADIR; \
 	done ;
-	$(eval DATADIR := $(shell cat DATADIR))
-	mkdir -p $(DATADIR)
