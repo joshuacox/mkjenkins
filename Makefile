@@ -25,8 +25,8 @@ cid:
 	@docker run --name=$(NAME) \
 	--cidfile="cid" \
 	-d \
-	-p 8080:8080\
-	-p 5000:5000\
+	-p 8080:8080 \
+	-p 5000:5000 \
 	-v $(DATADIR):/var/jenkins_home \
 	-t $(TAG)
 
