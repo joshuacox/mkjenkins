@@ -69,3 +69,8 @@ DATADIR:
 	@while [ -z "$$DATADIR" ]; do \
 		read -r -p "Enter the destination of the Apache data directory you wish to associate with this container [DATADIR]: " DATADIR; echo "$$DATADIR">>DATADIR; cat DATADIR; \
 	done ;
+
+perms:
+	$(eval DATADIR := $(shell cat DATADIR))
+	mkdir -p $(DATADIR)
+	chown -R 1000 $(DATADIR)
