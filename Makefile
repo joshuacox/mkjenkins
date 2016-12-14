@@ -21,11 +21,12 @@ cid:
 	$(eval NAME := $(shell cat NAME))
 	$(eval DATADIR := $(shell cat DATADIR))
 	$(eval TAG := $(shell cat TAG))
+	$(eval PORT := $(shell cat PORT))
 	mkdir -p $(DATADIR)
 	@docker run --name=$(NAME) \
 	--cidfile="cid" \
 	-d \
-	-p 8080:8080 \
+	-p $(PORT):8080 \
 	-p 5000:5000 \
 	-v $(DATADIR):/var/jenkins_home \
 	-t $(TAG)
@@ -57,6 +58,10 @@ TAG:
 		read -r -p "Enter the tag you wish to associate with this container [TAG]: " TAG; echo "$$TAG">>TAG; cat TAG; \
 	done ;
 
+PORT:
+	@while [ -z "$$PORT" ]; do \
+		read -r -p "Enter the PORT you wish to associate with this container [PORT]: " PORT; echo "$$PORT">>PORT; cat PORT; \
+	done ;
 
 rmall: rm
 
